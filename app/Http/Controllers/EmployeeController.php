@@ -12,9 +12,32 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $results = $request->perPage;
+        $query = Employee::query();
+
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            // Get fields
+            if (array_key_exists('name', $filters)) {
+                $query->whereLike('name', $filters['name']);
+            }
+            if (array_key_exists('surname', $filters)) {
+                return $query->whereLike('surname', $filters['surname']);
+            }
+            if (array_key_exists('admission_date', $filters)) {
+                $query->whereAdmissionDate($filters['admission_date']);
+            }
+            if (array_key_exists('level', $filters)) {
+                $query->whereProfesionalizationLevel($filters['level']);
+            }
+            if (array_key_exists('status', $filters)) {
+                $query->whereActive($status);
+            }
+        }
+
+        return $query->paginate($results);
     }
 
     /**

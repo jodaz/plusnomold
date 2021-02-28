@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         if (!$inProd) {
         // $this->call(ProfessionalizationLevelSeeder::class);
-           Employee::factory(10)->create();
+           Employee::factory(100)->create();
         }
     }
 }
