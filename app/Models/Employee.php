@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Payroll;
 
 class Employee extends Model
 {
@@ -13,12 +14,17 @@ class Employee extends Model
     protected $table = 'employees';
 
     protected $fillable = [
-        'dni',
+        'document',
         'name',
         'lastname',
         'admission_date',
         'professionalization_level'
     ];
+
+    public function payrolls()
+    {
+        return $this->hasMany(Payroll::class, 'document', 'document');
+    }
 
     public function profile()
     {

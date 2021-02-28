@@ -12,9 +12,20 @@ class PayrollController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $results = $request->perPage;
+        $query = Payroll::query();
+
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            // Get fields
+            if (array_key_exists('document', $filters)) {
+                $query->whereLike('document', $filters['document']);
+            }
+        }
+
+        return $query->paginate($results);
     }
 
     /**

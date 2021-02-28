@@ -15,9 +15,11 @@ class CreatePayrollsTable extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-            $table->string('identification');
-            $table->decimal('total_deduction_amount');
-            $table->string('amount');
+            $table->string('document')->index();
+            $table->decimal('total_deductions', 12, 2);
+            $table->decimal('total_earnings', 12, 2);
+            $table->decimal('total_amount', 12, 2);
+            $table->date('payment_date');
             $table->timestamps();
         });
     }

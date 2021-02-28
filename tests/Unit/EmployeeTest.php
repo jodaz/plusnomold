@@ -18,15 +18,10 @@ class EmployeeTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
     public function testGetEmployeesWithQuery()
     {
-        $response = $this->action('/api/employees',
-        );
-
-        $response->dump();
+        $response = $this->get('/api/employees?status=false');
 
         $response->assertStatus(200);
     }
-     **/
 }

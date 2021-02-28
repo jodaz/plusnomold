@@ -14,7 +14,7 @@ class EmployeeFactory extends Factory
      */
     protected $model = Employee::class;
 
-    protected $levels = ['Contratado', 'Fijo', 'Comisión de servicios'];
+    protected $levels = ['Contratado', 'Fijo', 'Comisionado'];
 
     /**
      * Define the model's default state.

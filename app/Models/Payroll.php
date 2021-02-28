@@ -12,7 +12,14 @@ class Payroll extends Model
     protected $table = 'payrolls';
 
     protected $fillable = [
-        'identification',
-        'total_deduction_amount'
+        'document',
+        'total_earnings',
+        'total_deductions',
+        'total_amount'
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'document', 'document');
+    }
 }
