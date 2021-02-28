@@ -14,6 +14,8 @@ class EmployeeFactory extends Factory
      */
     protected $model = Employee::class;
 
+    protected $levels = ['Contratado', 'Fijo', 'Comisión de servicios'];
+
     /**
      * Define the model's default state.
      *
@@ -22,10 +24,11 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'dni' => $this->faker->nationalId(),
+            'document' => $this->faker->numerify('#######'),
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
-            'date_admission' => $this->faker->date('Y-m-d', 'now')
+            'professionalization_level' => $this->levels[array_rand($this->levels)],
+            'admission_date' => $this->faker->date('Y-m-d', 'now')
         ];
     }
 }

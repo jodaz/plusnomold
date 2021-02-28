@@ -17,16 +17,11 @@ class Employee extends Model
         'name',
         'lastname',
         'admission_date',
-        'professionalization_level_id'
+        'professionalization_level'
     ];
 
     public function profile()
     {
         return $this->belongsToMany(Profile::class);
-    }
-
-    public function professionalizationLevel()
-    {
-        return $this->belongsTo(ProfessionalizationLevel::class);
     }
 }

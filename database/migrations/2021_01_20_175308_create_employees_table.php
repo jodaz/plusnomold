@@ -17,10 +17,10 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->string('document');
             $table->string('name');
-            $table->string('lastname');
+            $table->string('surname');
             $table->string('professionalization_level');
             $table->date('admission_date');
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

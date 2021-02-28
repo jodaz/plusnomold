@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $inProd = App::environment('production');
         // \App\Models\User::factory(10)->create();
         if (!$inProd) {
-           $this->call(ProfessionalizationLevelSeeder::class);
+        // $this->call(ProfessionalizationLevelSeeder::class);
            Employee::factory(10)->create();
         }
     }
