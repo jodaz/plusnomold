@@ -7,14 +7,18 @@ import { createBrowserHistory as createHistory } from 'history';
 const customHistory = createHistory();
 const dataProvider = apiClient('http://201.249.178.134:8150/api');
 // Resources
+import dashboard from './dashboard';
 import payrolls from './payrolls';
 import employees from './employees';
 
 export default function App() {
+
+  console.log(process.env);
   return (
     <Admin
       dataProvider={dataProvider}
       history={customHistory}
+      dashboard={dashboard}
     >
       <Resource {...payrolls} />
       <Resource {...employees} />

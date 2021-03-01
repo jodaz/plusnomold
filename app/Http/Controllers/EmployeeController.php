@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use PDF;
 
 class EmployeeController extends Controller
 {
@@ -70,6 +71,14 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
         //
+    }
+
+    public function downloadProof(Employee $employee)
+    {
+        $vars = ['employee'];
+        $pdf = PDF::loadView('pdf.proof-of-work', compact(['employee']));
+
+        return $pdf->stream('constancia.pdf');
     }
 
     /**

@@ -10,6 +10,8 @@ import {
   BooleanInput,
   TextField
 } from 'react-admin';
+import Actions from './actions';
+import DownloadButton from './DownloadButton';
 import { useMediaQuery } from '@material-ui/core';
 
 const levels = [
@@ -35,6 +37,7 @@ export default function(props) {
     <List
       {...props}
       title="Nóminas"
+      exporter={false}
       filters={<EmployeesFilter />}
       bulkActionButtons={false}
     >
@@ -51,6 +54,7 @@ export default function(props) {
             <TextField source='fullName' label='Nombre' />
             <TextField source='professionalization_level' label='Nivel de profesionalización' />
             <DateField source='admission_date' label='Fecha de ingreso' />
+            <DownloadButton />
           </Datagrid>
       )}
     </List>

@@ -16,6 +16,8 @@
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.2.2",
         "history": "^4.10.1",
+        "is-empty": "^1.2.0",
+        "js-file-download": "^0.4.12",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "mui-extra": "^0.7.0",
