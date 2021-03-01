@@ -15,8 +15,6 @@ class PayrollTest extends TestCase
     {
         $response = $this->get('/api/payrolls');
 
-        $response->dump();
-
         $response->assertStatus(200);
     }
 

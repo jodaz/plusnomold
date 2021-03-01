@@ -16,10 +16,17 @@ class Employee extends Model
     protected $fillable = [
         'document',
         'name',
-        'lastname',
+        'surname',
         'admission_date',
         'professionalization_level'
     ];
+
+    protected $appends = [ 'fullName' ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->surname}";
+    }
 
     public function payrolls()
     {

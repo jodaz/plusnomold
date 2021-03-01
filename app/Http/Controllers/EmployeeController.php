@@ -15,7 +15,7 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $results = $request->perPage;
-        $query = Employee::query();
+        $query = Employee::withCount('payrolls');
 
         if ($request->has('filter')) {
             $filters = $request->filter;
@@ -30,10 +30,10 @@ class EmployeeController extends Controller
                 $query->whereAdmissionDate($filters['admission_date']);
             }
             if (array_key_exists('level', $filters)) {
-                $query->whereProfesionalizationLevel($filters['level']);
+                $query->whereProfessionalizationLevel($filters['level']);
             }
             if (array_key_exists('status', $filters)) {
-                $query->whereActive($status);
+                $query->whereActive($filters['status']);
             }
         }
 

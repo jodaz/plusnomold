@@ -15,7 +15,7 @@ class PayrollController extends Controller
     public function index(Request $request)
     {
         $results = $request->perPage;
-        $query = Payroll::query();
+        $query = Payroll::with('employee');
 
         if ($request->has('filter')) {
             $filters = $request->filter;
