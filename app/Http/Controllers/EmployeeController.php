@@ -21,20 +21,20 @@ class EmployeeController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
+            if (array_key_exists('document', $filters)) {
+                $query->whereLike('document', $filters['document']);
+            }
             if (array_key_exists('name', $filters)) {
                 $query->whereLike('name', $filters['name']);
             }
             if (array_key_exists('surname', $filters)) {
-                return $query->whereLike('surname', $filters['surname']);
+                $query->whereLike('surname', $filters['surname']);
             }
-            if (array_key_exists('admission_date', $filters)) {
-                $query->whereAdmissionDate($filters['admission_date']);
+            if (array_key_exists('chargue', $filters)) {
+                $query->whereLike('chargue', $filters['chargue']);
             }
-            if (array_key_exists('level', $filters)) {
-                $query->whereProfessionalizationLevel($filters['level']);
-            }
-            if (array_key_exists('status', $filters)) {
-                $query->whereActive($filters['status']);
+            if (array_key_exists('division', $filters)) {
+                $query->whereLike('division', $filters['division']);
             }
         }
 

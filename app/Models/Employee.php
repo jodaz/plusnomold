@@ -18,7 +18,8 @@ class Employee extends Model
         'name',
         'surname',
         'admission_date',
-        'professionalization_level'
+        'chargue',
+        'division'
     ];
 
     protected $appends = [ 'fullName' ];

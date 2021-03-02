@@ -6,27 +6,21 @@ import {
   DateField,
   Filter,
   TextInput,
-  SelectInput,
   BooleanInput,
   TextField
 } from 'react-admin';
-import Actions from './actions';
 import DownloadButton from './DownloadButton';
 import { useMediaQuery } from '@material-ui/core';
 
-const levels = [
-  { id: 'Fijo', name: 'Fijo' },
-  { id: 'Comisionado', name: 'Comisionado' },
-  { id: 'Contratado', name: 'Contratado' },
-];
 
 const EmployeesFilter = props => (
   <Filter {...props}>
     <TextInput label="Buscar" source='name' alwaysOn />
     <TextInput label="Apellido" source="surname" />
     <TextInput label="Cédula" source="document" />
+    <TextInput label="Cargo" source="chargue" />
+    <TextInput label="División / Dirección" source="division" />
     <BooleanInput label="Activo" source="status" />
-    <SelectInput source="level" choices={levels} label="Nivel" allowEmpty={false}/>
   </Filter>
 );
 
@@ -52,7 +46,8 @@ export default function(props) {
           <Datagrid>
             <TextField source='document' label='Cédula' />
             <TextField source='fullName' label='Nombre' />
-            <TextField source='professionalization_level' label='Nivel de profesionalización' />
+            <TextField source='chargue' label='Cargo' />
+            <TextField source='division' label='División / Dirección' />
             <DateField source='admission_date' label='Fecha de ingreso' />
             <DownloadButton />
           </Datagrid>

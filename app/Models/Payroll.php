@@ -13,9 +13,17 @@ class Payroll extends Model
 
     protected $fillable = [
         'document',
-        'total_earnings',
+        'savings',
+        'retirement_fund',
+        'ilph',
+        'ipf',
+        'mdi',
+        'seniority_premium',
+        'children_premium',
+        'profession_premium',
+        'base_salary',
         'total_deductions',
-        'total_amount'
+        'total_allowances'
     ];
 
     public function employee()

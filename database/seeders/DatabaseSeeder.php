@@ -19,16 +19,26 @@ class DatabaseSeeder extends Seeder
     {
         $inProd = App::environment('production');
         // \App\Models\User::factory(10)->create();
+        $baseSalary = 800000.00;
+
         if (!$inProd) {
            $employees = Employee::factory(100)->create();
 
            foreach($employees as $employee) {
                Payroll::create([
                     'document' => $employee->document,
-                    'total_earnings' => 10000000.00,
-                    'total_deductions' => 500000.00,
-                    'total_amount' => 9500000.00,
-                    'payment_date' => Carbon::now()
+                    'mdi' => 0.04,
+                    'savings' => 0.00,
+                    'ipf' => $baseSalary * 0.005,
+                    'ilph' => $baseSalary * 0.01,
+                    'retirement_fund' => $baseSalary * 0.03,
+                    'base_salary' => $baseSalary,
+                    'profession_premium' => 100000.00,
+                    'children_premium' => 100000.00,
+                    'seniority_premium' => 100000.00,
+                    'payment_date' => Carbon::now(),
+                    'total_deductions' => $baseSalary * 0.085,
+                    'total_allowances' => 300000.00
                ]);
            }
         }
