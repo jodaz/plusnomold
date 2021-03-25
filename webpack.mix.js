@@ -13,6 +13,7 @@ const { MIX_PROXY_URL } = process.env;
  */
 
 mix.js('resources/js/app.js', 'public/js/app.js')
+  .css('resources/css/app.css', 'public/js/app.css')
   .react()
   .browserSync({
     files: [
@@ -20,7 +21,7 @@ mix.js('resources/js/app.js', 'public/js/app.js')
       'public/css/**/*',
     ],
     proxy: `${MIX_PROXY_URL}`,
-    open: false
+    open: true
   });
 
 if (mix.inProduction()) {

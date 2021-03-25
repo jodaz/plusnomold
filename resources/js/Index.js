@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import { Admin, Resource } from 'react-admin';
 import apiClient from 'ra-laravel-client';
 import { createBrowserHistory as createHistory } from 'history';
-const customHistory = createHistory();
-const dataProvider = apiClient('http://201.249.178.134:8150/api');
 import spanishMessages from '@blackbox-vision/ra-language-spanish';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-
+import { Login, Layout } from './layout';
 // Resources
 import dashboard from './dashboard';
 import payrolls from './payrolls';
 import employees from './employees';
+// Utils
+const customHistory = createHistory();
+import routes from './routes';
+const dataProvider = apiClient('http://201.249.178.134:8150/api');
 
 const i18nProvider = polyglotI18nProvider(() => ({
   ...spanishMessages
@@ -24,6 +26,9 @@ export default function App() {
       dataProvider={dataProvider}
       history={customHistory}
       dashboard={dashboard}
+      loginPage={Login}
+      layout={Layout}
+      customRoutes={routes}
     >
       <Resource {...payrolls} />
       <Resource {...employees} />
