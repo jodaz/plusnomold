@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Admin, Resource } from 'react-admin';
-import apiClient from 'ra-laravel-client';
 import { createBrowserHistory as createHistory } from 'history';
 import spanishMessages from '@blackbox-vision/ra-language-spanish';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
+import dataProvider from './dataProvider';
 import { Login, Layout } from './layout';
 import authProvider from './authProvider';
 // Resources
@@ -14,7 +14,6 @@ import employees from './employees';
 // Utils
 const customHistory = createHistory();
 import routes from './routes';
-const dataProvider = apiClient('http://localhost:8150/api');
 
 const i18nProvider = polyglotI18nProvider(() => ({
   ...spanishMessages
