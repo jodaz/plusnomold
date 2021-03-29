@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
-use App\Models\Employee;
-use App\Models\Payroll;
-use Carbon\Carbon;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,29 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $inProd = App::environment('production');
-        // \App\Models\User::factory(10)->create();
-        $baseSalary = 800000.00;
+        
+        $this->call(AdminSeeder::class);
+        $this->call(RolesAndPermissionsSeeder::class);
 
         if (!$inProd) {
-           $employees = Employee::factory(100)->create();
-
-           foreach($employees as $employee) {
-               Payroll::create([
-                    'document' => $employee->document,
-                    'mdi' => 0.04,
-                    'savings' => 0.00,
-                    'ipf' => $baseSalary * 0.005,
-                    'ilph' => $baseSalary * 0.01,
-                    'retirement_fund' => $baseSalary * 0.03,
-                    'base_salary' => $baseSalary,
-                    'profession_premium' => 100000.00,
-                    'children_premium' => 100000.00,
-                    'seniority_premium' => 100000.00,
-                    'payment_date' => Carbon::now(),
-                    'total_deductions' => $baseSalary * 0.085,
-                    'total_allowances' => 300000.00
-               ]);
-           }
+            // Create more users
+            User::factory(10)->create();
+            $this->call(TestSeeder::class);
         }
     }
 }
