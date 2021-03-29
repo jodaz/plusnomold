@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field, Form } from 'react-final-form';
-import { useLocation } from 'react-router-dom';
 import {
   Typography,
   Button,
@@ -13,9 +12,10 @@ import {
 } from '@material-ui/core';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { Notification, useLogin, useNotify } from 'react-admin';
+import { Notification, useRedirect } from 'react-admin';
 import theme from './theming';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -95,33 +95,16 @@ const renderInput = ({
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
-  const notify = useNotify();
-  const login = useLogin();
-  const location = useLocation();
+  const redirect = useRedirect();
 
-  const handleSubmit = (auth) => {
+  const handleSubmit = (data) => {
     setLoading(true);
-    login(auth, location.state ? location.state.nextPathname : '/').catch(
-      (error) => {
-        setLoading(false);
-        notify(
-          typeof error === 'string'
-            ? error
-            : typeof error === 'undefined' || !error.message
-            ? 'ra.auth.sign_in_error'
-            : error.message,
-          'warning',
-          {
-            _:
-            typeof error === 'string'
-              ? error
-              : error && error.message
-              ? error.message
-              : undefined,
-          }
-        );
-      }
-    );
+    axios.get('/sanctum/csrf-cookie').then(res => {
+      axios.post('/api/login', data).then(res => {
+        redirect('/dashboard');
+      })
+    })
+    setLoading(false);
   };
 
   const validate = (values) => {

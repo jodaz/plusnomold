@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::apiResource('employees', 'EmployeeController');
-Route::apiResource('payrolls', 'PayrollController');
-Route::get('employees/{employee}/proofs/download', 'EmployeeController@downloadProof');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('employees', 'EmployeeController');
+    Route::apiResource('payrolls', 'PayrollController');
+    Route::get('employees/{employee}/proofs/download', 'EmployeeController@downloadProof');
+});

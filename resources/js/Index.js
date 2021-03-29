@@ -13,13 +13,14 @@ import employees from './employees';
 // Utils
 const customHistory = createHistory();
 import routes from './routes';
-const dataProvider = apiClient('http://201.249.178.134:8150/api');
+const dataProvider = apiClient('http://localhost:8150/api');
 
 const i18nProvider = polyglotI18nProvider(() => ({
   ...spanishMessages
 }));
 
 export default function App() {
+  console.log(process.env);
   return (
     <Admin
       i18nProvider={i18nProvider}

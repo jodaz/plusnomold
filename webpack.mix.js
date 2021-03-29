@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const { MIX_PROXY_URL } = process.env;
 
 /*
  |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ mix.js('resources/js/app.js', 'public/js/app.js')
       'public/js/**/*',
       'public/css/**/*',
     ],
-    proxy: `${MIX_PROXY_URL}`,
+    proxy: `${process.env.MIX_PROXY_URL}`,
     open: true
   });
 
