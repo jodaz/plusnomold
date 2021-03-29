@@ -12,10 +12,9 @@ import {
 } from '@material-ui/core';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { Notification, useRedirect } from 'react-admin';
+import { Notification, useRedirect, useLogin, useNotify } from 'react-admin';
 import theme from './theming';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -95,15 +94,14 @@ const renderInput = ({
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
+  const login = useLogin();
   const redirect = useRedirect();
+  const notify = useNotify();
 
   const handleSubmit = (data) => {
     setLoading(true);
-    axios.get('/sanctum/csrf-cookie').then(res => {
-      axios.post('/api/login', data).then(res => {
-        redirect('/dashboard');
-      })
-    })
+    login(data)
+      .catch(() => notify('Error!'));
     setLoading(false);
   };
 

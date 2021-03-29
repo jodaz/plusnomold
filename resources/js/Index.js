@@ -6,6 +6,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import spanishMessages from '@blackbox-vision/ra-language-spanish';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { Login, Layout } from './layout';
+import authProvider from './authProvider';
 // Resources
 import dashboard from './dashboard';
 import payrolls from './payrolls';
@@ -20,11 +21,11 @@ const i18nProvider = polyglotI18nProvider(() => ({
 }));
 
 export default function App() {
-  console.log(process.env);
   return (
     <Admin
       i18nProvider={i18nProvider}
       dataProvider={dataProvider}
+      authProvider={authProvider}
       history={customHistory}
       dashboard={dashboard}
       loginPage={Login}
