@@ -13,5 +13,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{route?}', 'welcome')
-    ->where('route', '.*');
