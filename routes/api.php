@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
- */
+*/
 
-Route::post('register', 'AuthController@register');
-Route::post('authorize', 'AuthController@login');
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('employees', 'EmployeeController');
-    Route::apiResource('payrolls', 'PayrollController');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['permission:Administrador'])->group(function () {
+        Route::apiResource('employees', 'EmployeeController');
+        Route::apiResource('payrolls', 'PayrollController');
+    });
     Route::get('employees/{employee}/proofs/download', 'EmployeeController@downloadProof');
 
     Route::get('revoke', 'AuthController@logout');
 });
+
+Route::post('authorize', 'AuthController@login');
+Route::post('register', 'AuthController@register');

@@ -16,13 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $inProd = App::environment('production');
-        
+
         $this->call(AdminSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
 
         if (!$inProd) {
             // Create more users
-            User::factory(10)->create();
+            $users = User::factory(10)->create();
+
+            foreach($users as $user) {
+                $user->syncRoles(2);
+            }
             $this->call(TestSeeder::class);
         }
     }
