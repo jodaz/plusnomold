@@ -13,7 +13,18 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        return $request->all();
+        $user = User::create([
+            'full_name' => $request->full_name,
+            'document' => $request->document,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $token = $user->createToken(Str::random(20))->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
     }
 
     public function login(LoginRequest $request)
